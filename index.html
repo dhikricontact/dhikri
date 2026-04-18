@@ -58,8 +58,97 @@
 
   <title>Dhikri | Live Dhikr Counter and Daily Wird</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+    .install-banner {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: min(420px, calc(100vw - 32px));
+      padding: 14px 16px;
+      border: 1px solid rgba(41, 91, 68, 0.18);
+      border-radius: 18px;
+      background: rgba(255, 251, 244, 0.94);
+      box-shadow: 0 12px 30px rgba(26, 41, 33, 0.16);
+      backdrop-filter: blur(10px);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .install-banner__copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .install-banner__title {
+      color: #234638;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .install-banner__text {
+      color: #5f6d63;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .install-banner__button {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: #295b44;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .install-banner__button:hover {
+      background: #214b38;
+    }
+
+    @media (max-width: 640px) {
+      .install-banner {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .install-banner__button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="install-banner">
+    <div class="install-banner__copy">
+      <div class="install-banner__title">Install Dhikri on Android</div>
+      <div class="install-banner__text">
+        Get the full app from Google Play with live voice counting and daily wird.
+      </div>
+    </div>
+    <a
+      class="install-banner__button"
+      href="https://play.google.com/store/apps/details?id=com.soumia.tasbihcounter&pcampaignid=web_share"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Install App
+    </a>
+  </div>
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader
