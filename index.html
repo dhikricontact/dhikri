@@ -59,95 +59,145 @@
   <title>Dhikri | Live Dhikr Counter and Daily Wird</title>
   <link rel="manifest" href="manifest.json">
   <style>
-    .install-banner {
+    .install-popup-backdrop {
       position: fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 9999;
-      display: flex;
+      inset: 0;
+      z-index: 9998;
+      display: none;
       align-items: center;
-      gap: 12px;
-      max-width: min(420px, calc(100vw - 32px));
-      padding: 14px 16px;
-      border: 1px solid rgba(41, 91, 68, 0.18);
-      border-radius: 18px;
-      background: rgba(255, 251, 244, 0.94);
-      box-shadow: 0 12px 30px rgba(26, 41, 33, 0.16);
-      backdrop-filter: blur(10px);
+      justify-content: center;
+      padding: 20px;
+      background: rgba(17, 27, 22, 0.28);
+      backdrop-filter: blur(6px);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    .install-banner__copy {
+    .install-popup-backdrop.is-visible {
+      display: flex;
+    }
+
+    .install-popup {
+      width: min(520px, 100%);
+      padding: 24px;
+      border: 1px solid rgba(41, 91, 68, 0.16);
+      border-radius: 28px;
+      background: rgba(255, 251, 244, 0.98);
+      box-shadow: 0 20px 60px rgba(26, 41, 33, 0.22);
+    }
+
+    .install-popup__copy {
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      min-width: 0;
+      gap: 6px;
     }
 
-    .install-banner__title {
-      color: #234638;
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .install-banner__text {
+    .install-popup__eyebrow {
       color: #5f6d63;
-      font-size: 13px;
-      line-height: 1.35;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .install-banner__button {
-      flex-shrink: 0;
+    .install-popup__title {
+      color: #234638;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .install-popup__text {
+      color: #5f6d63;
+      font-size: 16px;
+      line-height: 1.55;
+      margin-top: 4px;
+    }
+
+    .install-popup__actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .install-popup__button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 42px;
-      padding: 0 16px;
+      min-height: 46px;
+      padding: 0 18px;
       border-radius: 999px;
-      background: #295b44;
-      color: #ffffff;
       font-size: 14px;
       font-weight: 700;
       text-decoration: none;
       white-space: nowrap;
+      cursor: pointer;
+      border: 1px solid transparent;
     }
 
-    .install-banner__button:hover {
+    .install-popup__button--primary {
+      background: #295b44;
+      color: #ffffff;
+    }
+
+    .install-popup__button--primary:hover {
       background: #214b38;
     }
 
+    .install-popup__button--secondary {
+      background: transparent;
+      border-color: rgba(41, 91, 68, 0.24);
+      color: #295b44;
+    }
+
     @media (max-width: 640px) {
-      .install-banner {
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
-        flex-direction: column;
-        align-items: stretch;
+      .install-popup {
+        padding: 20px;
+        border-radius: 24px;
       }
 
-      .install-banner__button {
+      .install-popup__title {
+        font-size: 24px;
+      }
+
+      .install-popup__text {
+        font-size: 15px;
+      }
+
+      .install-popup__actions {
+        flex-direction: column;
+      }
+
+      .install-popup__button {
         width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="install-banner">
-    <div class="install-banner__copy">
-      <div class="install-banner__title">Install Dhikri on Android</div>
-      <div class="install-banner__text">
-        Get the full app from Google Play with live voice counting and daily wird.
+  <div class="install-popup-backdrop" id="install-popup">
+    <div class="install-popup" role="dialog" aria-modal="true" aria-labelledby="install-popup-title">
+      <div class="install-popup__copy">
+        <div class="install-popup__eyebrow">Get the Android app</div>
+        <div class="install-popup__title" id="install-popup-title">Install Dhikri on your phone</div>
+        <div class="install-popup__text">
+          Get the full app from Google Play with live voice counting, daily wird, reminders, and history.
+        </div>
+      </div>
+      <div class="install-popup__actions">
+        <button class="install-popup__button install-popup__button--secondary" id="install-popup-later" type="button">
+          Later
+        </button>
+        <a
+          class="install-popup__button install-popup__button--primary"
+          href="https://play.google.com/store/apps/details?id=com.soumia.tasbihcounter&pcampaignid=web_share"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Install App
+        </a>
       </div>
     </div>
-    <a
-      class="install-banner__button"
-      href="https://play.google.com/store/apps/details?id=com.soumia.tasbihcounter&pcampaignid=web_share"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Install App
-    </a>
   </div>
   <!--
     You can customize the "flutter_bootstrap.js" script.
@@ -157,6 +207,43 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
+  <script>
+    (function () {
+      var popup = document.getElementById('install-popup');
+      var laterButton = document.getElementById('install-popup-later');
+      var storageKey = 'dhikri-install-popup-dismissed';
+
+      if (!popup || !laterButton) {
+        return;
+      }
+
+      try {
+        if (window.localStorage.getItem(storageKey) === 'true') {
+          return;
+        }
+      } catch (error) {}
+
+      window.setTimeout(function () {
+        popup.classList.add('is-visible');
+      }, 900);
+
+      laterButton.addEventListener('click', function () {
+        popup.classList.remove('is-visible');
+        try {
+          window.localStorage.setItem(storageKey, 'true');
+        } catch (error) {}
+      });
+
+      popup.addEventListener('click', function (event) {
+        if (event.target === popup) {
+          popup.classList.remove('is-visible');
+          try {
+            window.localStorage.setItem(storageKey, 'true');
+          } catch (error) {}
+        }
+      });
+    })();
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
