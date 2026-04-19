@@ -1,11 +1,11 @@
 {
-    "name": "Dhikri",
-    "short_name": "Dhikri",
+    "name": "Dhikri Voice",
+    "short_name": "Dhikri Voice",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#F3EEDF",
     "theme_color": "#295B44",
-    "description": "Dhikri is a bilingual dhikr app with manual and live voice counting.",
+    "description": "Dhikri Voice is a bilingual dhikr app with manual and live voice counting.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

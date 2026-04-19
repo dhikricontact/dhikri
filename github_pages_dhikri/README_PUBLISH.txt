@@ -1,8 +1,6 @@
-# Dhikri Web Publish
+# Dhikri Voice Web Publish
 
-This folder is ready for a GitHub Pages repository named dhikri.
-
-Upload all files inside this folder to the root of the GitHub repository.
+Updated web build for the GitHub Pages repository named dhikri.
 
 Expected public URL:
 https://dhikricontact.github.io/dhikri/
