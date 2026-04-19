@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://dhikricontact.github.io/dhikri/sitemap.xml

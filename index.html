@@ -211,15 +211,20 @@
     (function () {
       var popup = document.getElementById('install-popup');
       var laterButton = document.getElementById('install-popup-later');
-      var storageKey = 'dhikri-voice-install-popup-dismissed-v2';
+      var storageKey = 'dhikri-voice-install-popup-dismissed-at-v3';
+      var dismissForMs = 7 * 24 * 60 * 60 * 1000;
 
       if (!popup || !laterButton) {
         return;
       }
 
       try {
-        if (window.localStorage.getItem(storageKey) === 'true') {
-          return;
+        var dismissedAt = window.localStorage.getItem(storageKey);
+        if (dismissedAt) {
+          var dismissedAtMs = Number(dismissedAt);
+          if (!Number.isNaN(dismissedAtMs) && Date.now() - dismissedAtMs < dismissForMs) {
+            return;
+          }
         }
       } catch (error) {}
 
@@ -230,7 +235,7 @@
       laterButton.addEventListener('click', function () {
         popup.classList.remove('is-visible');
         try {
-          window.localStorage.setItem(storageKey, 'true');
+          window.localStorage.setItem(storageKey, String(Date.now()));
         } catch (error) {}
       });
 
@@ -238,7 +243,7 @@
         if (event.target === popup) {
           popup.classList.remove('is-visible');
           try {
-            window.localStorage.setItem(storageKey, 'true');
+            window.localStorage.setItem(storageKey, String(Date.now()));
           } catch (error) {}
         }
       });
